@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import auth from './Firebase/firebase.config';
+import { getMe, setUser, userLogout } from './Redux/features/Auth/AuthSlice';
+import { routers } from './Routes/Routes';
 
-function App() {
+const App = () => {
+  const { isError, error, isLoading, user } = useSelector((state => state?.auth));
+
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+
+      const newUser = { email: user?.email, photoURL: user?.photoURL, name: user?.displayName };
+
+      if (user) {
+        // dispatch(setUser(newUser));
+        dispatch(getMe())
+          .then(res => {
+           /*  if (res.type !== "auth/getMe/fulfilled") {
+              dispatch(userLogout())
+            }
+            console.log(res); */
+          })
+
+      }
+    });
+  }, [dispatch]);
+
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      <RouterProvider router={routers} />
     </div>
   );
-}
+};
 
 export default App;
