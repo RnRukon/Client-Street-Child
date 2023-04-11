@@ -51,10 +51,19 @@ export const organizationApi = createApi({
                  body: data
              }),
              invalidatesTags: ['child']
-         }),
-         updateChild: builder.mutation({
+         }),*/
+        deliveryChildInOrganization: builder.mutation({
+            query: ({ data }) => ({
+                url: `/deliveryChild`,
+                method: 'PATCH',
+                headers: { 'Authorization': token },
+                body: data
+            }),
+            invalidatesTags: ['organization']
+        }),
+        /*  updateOrganization: builder.mutation({
              query: ({ data, id }) => ({
-                 url: `/updateChild/${id}`,
+                 url: `/updateOrganization/${id}`,
                  method: 'PATCH',
                  headers: { 'Authorization': token },
                  body: data
@@ -68,5 +77,7 @@ export const organizationApi = createApi({
 
 export const {
     useGetOrganizationsQuery,
+    useUpdateOrganizationMutation,
+    useDeliveryChildInOrganizationMutation
 
 } = organizationApi;

@@ -5,6 +5,8 @@ import OrganizationTable from '../../../../Components/OrganizationTable/Organiza
 const OrganizationList = () => {
     const { data } = useGetOrganizationsQuery();
 
+
+
     return (
         <div className=' container mx-auto py-3'>
             <div className=' grid grid-cols-12 gap-3 '>

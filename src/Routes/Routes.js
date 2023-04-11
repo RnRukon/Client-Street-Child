@@ -17,6 +17,7 @@ import DashboardLayout from "../Pages/Dashboard/Dashboard/DashboardLayout/Dashbo
 import ChildDetails from "../Pages/Dashboard/Admin/ManageChild/ChildDetails";
 import RegisterOrganization from "../Authentication/RegisterOrganization";
 import OrganizationList from "../Pages/Dashboard/Admin/OrganizationList/OrganizationList";
+// import QRLScanner from "../Components/QRLScanner/QRLScanner";
 
 export const routers = createBrowserRouter([
     {
@@ -59,6 +60,11 @@ export const routers = createBrowserRouter([
                 element: <RegisterOrganization />,
 
             },
+            /* {
+                path: "/QRLScanner",
+                element: <QRLScanner />,
+
+            }, */
             {
                 path: "/dashboard",
                 element: <DashboardLayout />,

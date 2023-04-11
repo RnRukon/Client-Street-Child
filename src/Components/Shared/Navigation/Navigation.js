@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../../Redux/features/Auth/AuthSlice'
@@ -10,8 +10,8 @@ import { HiOutlineUserCircle } from 'react-icons/hi'
 
 const navigation = [
   { name: 'Home', path: '/', current: true },
-  { name: 'Orphanages', path: '/orphanages', current: false },
   { name: 'About', path: '/about', current: false },
+  { name: 'QR Scanner', path: '/QRLScanner', current: false },
 
 ]
 
@@ -32,19 +32,17 @@ export default function Navigation() {
     dispatch(userLogout())
   }
 
-  const userNavigation = [
-    { name: user?.name },
+
+
+  const menu = [
     { name: 'Your Profile', path: '/profile' },
     { name: 'Dashboard', path: '/dashboard' },
-
-
   ]
-
 
   return (
     <>
 
-      <div className="min-h-full">
+      <div className="min-h-full ">
         <Disclosure as="nav" className=" bg-gradient-to-t from-slate-500 via-slate-700 to-slate-900">
           {({ open }) => (
             <>
@@ -80,18 +78,12 @@ export default function Navigation() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <button
-                        type="button"
-                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button as={NavLink} to='/profile' className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
                             {
                               user?.photoURL ?
@@ -112,7 +104,21 @@ export default function Navigation() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item, i) => (
+
+                            <div  className="flex items-center bg-gray-100' : '',
+                                      'block px-4 py-2 text-sm text-gray-700">
+                              <div className="flex-shrink-0">
+                                <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
+                              </div>
+                              <div className="ml-3">
+                                <div className="text-md font-bold  leading-none ">{user?.name}</div>
+                                <div className="text-xs font-medium leading-none ">{user?.email}</div>
+                              </div>
+
+
+                            </div>
+                        
+                            {menu.map((item, i) => (
                               <Menu.Item key={i}>
                                 {({ active }) => (
                                   <NavLink
@@ -199,7 +205,7 @@ export default function Navigation() {
                   </div>
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Disclosure.Button className="inline-flex  items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -211,13 +217,24 @@ export default function Navigation() {
                 </div>
               </div>
 
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="md:hidden ">
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                  <div className="flex items-center px-5">
+                    <div className="flex-shrink-0">
+                      <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-base font-medium leading-none text-white">{user?.name}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
+                    </div>
+
+
+                  </div>
                   {navigation.map((item, i) => (
                     <Disclosure.Button
                       key={i}
-                      as="a"
-                      href={item.href}
+                      as={NavLink}
+                      to={item.path}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
@@ -229,35 +246,25 @@ export default function Navigation() {
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pt-4 pb-3">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user?.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
+
 
 
                   <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item, i) => (
-                      <Disclosure.Button
-                        key={i}
-                        as="a"
-                        href={item.href}
-                        className={`block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white `}
-                      >
-                        {item.name}
-                      </Disclosure.Button>
+                    {menu.map((item, i) => (
+                      <div   key={i}>
+
+                        <Disclosure.Button
+                          as={NavLink}
+                       
+
+                          to={item.path}
+                          className={`block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white `}
+                        >
+                          {item.name}
+                        </Disclosure.Button>
+                      </div>
                     ))}
+
                   </div>
                 </div>
               </Disclosure.Panel>

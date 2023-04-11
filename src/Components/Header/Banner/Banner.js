@@ -7,23 +7,23 @@ import Image3 from "./Image/Street_children_are_in_smart_look_after_waring_their
 
 const Banner = () => {
     return (
-        <>
+        <div className=''>
             <Carousel autoPlay  showThumbs={false}  className=' text-center thumbs-wrapper' >
                 <div className="">
-                    <img className=' h-96 object-cover'  src={Image1} alt='' />
+                    <img className=' h-screen object-cover'  src={Image1} alt='' />
                     <p className=' legend'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, saepe!</p>
 
                 </div>
                 <div className="">
-                    <img className=' h-96 object-cover' src={Image2} alt='' />
+                    <img className=' h-screen  object-cover' src={Image2} alt='' />
                     <p className=' legend'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, saepe!</p>
                 </div>
                 <div className="">
-                    <img className=' h-96 object-cover'  src={Image3} alt='' />
+                    <img className=' h-screen  object-cover'  src={Image3} alt='' />
                     <p className=' legend'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, saepe!</p>
                 </div>
             </Carousel>
-        </>
+        </div>
     );
 };
 

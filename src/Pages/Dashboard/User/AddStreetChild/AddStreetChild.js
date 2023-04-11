@@ -8,7 +8,7 @@ const AddStreetChild = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const [addChild, { isLoading, isError, isSuccess, error }] = useAddChildMutation();
+    const [addChild, { isError, isSuccess, error }] = useAddChildMutation();
 
 
     const onSubmit = async (data) => {

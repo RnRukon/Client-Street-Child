@@ -1,9 +1,9 @@
 import React from 'react';
-import age from '../../Hooks/useAgeCalculation';
 
-const OrganizationTable = ({d, handleChangeStatus}) => {
 
-console.log(d);
+const OrganizationTable = ({ d, handleChangeStatus }) => {
+
+  
     return (
         <div className=' '>
             <div className=' grid grid-cols-12 gap-5 p-3'>
@@ -30,7 +30,7 @@ console.log(d);
                             <h1 className='text-sm'>{d?.founded}</h1>
                         </div>
                     </div>
-                   
+
                     <div className=' grid grid-cols-12 gap-5 border my-1'>
                         <div className=' col-span-5 p-1 '>
                             <h1 className=' text-sm'>Email:</h1>
@@ -84,7 +84,7 @@ console.log(d);
                             <h1 className=' text-sm'>Total Seat:</h1>
                         </div>
                         <div className=' col-span-7 p-1 border-l'>
-                            <h1 className='text-sm'>{d?.seat}/{d?.seat-100}</h1>
+                            <h1 className='text-sm'>Total: {d?.seat} = Fill up: {d?.seat - 100 + d.childList.length}</h1>
                         </div>
                     </div>
                     <div className=' grid grid-cols-12 gap-5 border my-1'>
@@ -92,7 +92,7 @@ console.log(d);
                             <h1 className=' text-sm'>Empty seat:</h1>
                         </div>
                         <div className=' col-span-7 p-1 border-l'>
-                            <h1 className='text-sm'>{100}</h1>
+                            <h1 className='text-sm'>{100 - d.childList.length}</h1>
                         </div>
                     </div>
                     <div className=' grid grid-cols-12 gap-5 border my-1'>
@@ -103,7 +103,7 @@ console.log(d);
                             <h1 className='text-sm'>{d?.status?.toUpperCase()}</h1>
                         </div>
                     </div>
-                   
+
                     <div className=' grid grid-cols-12 gap-5 border my-1'>
                         <div className=' col-span-5 p-1 '>
                             <h1 className=' text-sm'>Action:</h1>
