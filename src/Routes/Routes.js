@@ -3,13 +3,10 @@ import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Login/Register";
 import About from "../Pages/About/About";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
-
-
 import AddStreetChild from "../Pages/Dashboard/User/AddStreetChild/AddStreetChild";
 import MyChildList from "../Pages/Dashboard/User/MyChildList/MyChildList";
 import Home from "../Pages/Home/Home";
 import HomeLayout from "../Pages/Home/HomeLayout";
-import Orphanages from "../Pages/Orphanages/Orphanages";
 import Profile from "../Pages/Profiles/Profile";
 import ChildList from "../Pages/Dashboard/Admin/ChildList/ChildList";
 import ManageChild from "../Pages/Dashboard/Admin/ManageChild/ManageChild";
@@ -17,7 +14,17 @@ import DashboardLayout from "../Pages/Dashboard/Dashboard/DashboardLayout/Dashbo
 import ChildDetails from "../Pages/Dashboard/Admin/ManageChild/ChildDetails";
 import RegisterOrganization from "../Authentication/RegisterOrganization";
 import OrganizationList from "../Pages/Dashboard/Admin/OrganizationList/OrganizationList";
-// import QRLScanner from "../Components/QRLScanner/QRLScanner";
+import Details from "../Components/Details/Details";
+import OrganizationDetails from "../Pages/Dashboard/Admin/OrganizationList/OrganizationDetails/OrganizationDetails";
+import PrivateRoute from "./PrivateRoute";
+import MakeAdmin from "../Pages/Dashboard/Admin/MakeAdmin/MakeAdmin";
+import AdminRoute from "./AdminRoute";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import NoteFoundPage from "../Pages/NoteFoundPage(404)/NoteFoundPage";
+import FeedbackForm from "../Pages/Dashboard/User/Feedback/FeedbackfForm";
+import Feedback from "../Pages/Dashboard/Admin/Feedback/Feedback";
+
+
 
 export const routers = createBrowserRouter([
     {
@@ -32,7 +39,10 @@ export const routers = createBrowserRouter([
 
             {
                 path: "/profile",
-                element: <Profile />,
+                element:
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>,
 
             },
             {
@@ -41,10 +51,11 @@ export const routers = createBrowserRouter([
 
             },
             {
-                path: "/orphanages",
-                element: <Orphanages />,
+                path: "/contactUs",
+                element: <ContactUs />,
 
             },
+
             {
                 path: "/login",
                 element: <Login />,
@@ -60,45 +71,114 @@ export const routers = createBrowserRouter([
                 element: <RegisterOrganization />,
 
             },
-            /* {
-                path: "/QRLScanner",
-                element: <QRLScanner />,
 
-            }, */
             {
                 path: "/dashboard",
-                element: <DashboardLayout />,
+                element:
+                    <PrivateRoute>
+                        <DashboardLayout />
+                    </PrivateRoute>,
                 children: [
                     {
                         path: '/dashboard',
-                        element: <Dashboard />
+                        element:
+                            <PrivateRoute>
+                                <Dashboard />
+                            </PrivateRoute>
                     },
 
                     {
                         path: '/dashboard/addStreetChild',
-                        element: <AddStreetChild />
+                        element:
+                            <PrivateRoute>
+                                <AddStreetChild />
+                            </PrivateRoute>
                     },
                     {
                         path: '/dashboard/myChildList',
-                        element: <MyChildList />
+                        element:
+                            <PrivateRoute>
+                                <MyChildList />
+                            </PrivateRoute>
                     },
-
+                    {
+                        path: '/dashboard/details/:id',
+                        element:
+                            <PrivateRoute>
+                                <Details />
+                            </PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/feedback-form',
+                        element:
+                            <PrivateRoute>
+                                <FeedbackForm />
+                            </PrivateRoute>
+                    },
                     // admin --------------------
                     {
                         path: '/dashboard/childList',
-                        element: <ChildList />
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <ChildList />
+                                </AdminRoute>
+                            </PrivateRoute>
                     },
                     {
                         path: '/dashboard/manageChild',
-                        element: <ManageChild />
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <ManageChild />
+                                </AdminRoute>
+                            </PrivateRoute>
                     },
                     {
                         path: '/dashboard/childDetails/:id',
-                        element: <ChildDetails />
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <ChildDetails />
+                                </AdminRoute>
+                            </PrivateRoute>
                     },
+
                     {
                         path: '/dashboard/organizationList',
-                        element: <OrganizationList />
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <OrganizationList />
+                                </AdminRoute>
+                            </PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/organization/details/:id',
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <OrganizationDetails />
+                                </AdminRoute>
+                            </PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/makeAdmin',
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <MakeAdmin />
+                                </AdminRoute>
+                            </PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/feedback',
+                        element:
+                            <PrivateRoute>
+                                <AdminRoute>
+                                    <Feedback />
+                                </AdminRoute>
+                            </PrivateRoute>
                     },
 
                 ]
@@ -107,6 +187,10 @@ export const routers = createBrowserRouter([
         ],
 
     },
+    {
+        path:'*',
+        element:<NoteFoundPage/>
+    }
 
 
 

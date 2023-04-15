@@ -32,7 +32,14 @@ export const childApi = createApi({
             providesTags: ['child']
         }),
 
-
+        getSingleChildByUserId: builder.query({
+            query: ({ id }) => ({
+                url: `/getSingleChildByUserId/${id}`,
+                method: 'GET',
+                headers: { 'Authorization': token },
+            }),
+            providesTags: ['child']
+        }),
         getMyStreetChildList: builder.query({
             query: () => ({
                 url: `/getMyAllStreetChild`,
@@ -72,5 +79,7 @@ export const {
     useAddChildMutation,
     useGetSingleChildQuery,
     useUpdateChildMutation,
-    useGetAllStreetChildQuery
+    useGetAllStreetChildQuery,
+    useGetSingleChildByUserIdQuery
+
 } = childApi;

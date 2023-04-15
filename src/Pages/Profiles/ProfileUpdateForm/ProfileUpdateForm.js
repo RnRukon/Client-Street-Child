@@ -161,7 +161,6 @@ const ProfileUpdateForm = () => {
                                         id="dateOfBirth"
                                         name="dateOfBirth"
                                         type="date"
-                                        defaultValue={user?.result?.user?.dateOfBirth}
                                         placeholder="Date Of Birth"
                                         disabled={edit}
                                         {...register('dateOfBirth', { required: true, type: 'date' })}
@@ -319,6 +318,7 @@ const ProfileUpdateForm = () => {
                     <div>
                         <button
                             type="submit"
+                            disabled={edit}
                             className=' py-1 px-10  mt-24 text-slate-50 bg-gradient-to-tr  from-cyan-300  to-cyan-700 hover:bg-gradient-to-tl active:bg-gradient-to-r rounded-lg font-extrabold
 '
                         >

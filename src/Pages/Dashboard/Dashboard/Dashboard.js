@@ -1,13 +1,14 @@
 import React from 'react';
 import AdminDashboard from '../Admin/AdminDashboard/AdminDashboard';
 import UserDashboard from '../User/UserDashboard/UserDahboard';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-    const role = 'user';
+    const { user } = useSelector(state => state.auth)
     return (
         <div>
-            {role === "user" && <UserDashboard />}
-            {role === "admin" && <AdminDashboard />}
+            {user?.role === "user" && <UserDashboard />}
+            {user?.role === "admin" && <AdminDashboard />}
         </div>
     );
 };

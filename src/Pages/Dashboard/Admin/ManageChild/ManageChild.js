@@ -2,12 +2,14 @@ import React from 'react';
 import { useGetAllChildQuery } from '../../../../Redux/features/Child/ChildApi';
 import { NavLink } from 'react-router-dom';
 import {FcViewDetails} from 'react-icons/fc';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 const ManageChild = () => {
 
     const { data } = useGetAllChildQuery();
 
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto py-3'>
+            <DashboardNavbar pageTitle='Manage child'/>
             <div className=" overflow-x-auto">
 
                 <div className="w-full ">

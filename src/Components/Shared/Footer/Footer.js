@@ -23,11 +23,11 @@ const Footer = () => {
             <div className=' col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4'>
                 <h1 className=' text-2xl font-extrabold font-mono text-amber-400 '>EXPLORE</h1>
                 <div className=' leading-loose'>
-                    <Link to='/' className='  block text-slate-50  font-extrabold   '>About us</Link>
-                    <Link to='/' className='  block text-slate-50  font-extrabold   '>Our people</Link>
-                    <Link to='/' className='  block text-slate-50  font-extrabold   '>Our reports</Link>
-                    <Link to='/' className='  block text-slate-50  font-extrabold   '>Careers</Link>
-                    <Link to='/' className='  block text-slate-50  font-extrabold   '>Contact us</Link>
+                    <Link to='/profile' className='  block text-slate-50  font-extrabold   '>Profile</Link>
+                    <Link to='/about' className='  block text-slate-50  font-extrabold   '>About us</Link>
+                    <Link to='/dashboard/addStreetChild' className='  block text-slate-50  font-extrabold   '>Add street Child</Link>
+                    <Link to='/dashboard/myChildList' className='  block text-slate-50  font-extrabold   '>My Child</Link>
+                    <Link to='/dashboard' className='  block text-slate-50  font-extrabold   '>Dashboard</Link>
                 </div>
             </div>
 

@@ -2,16 +2,18 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { userLogout } from '../../../Redux/features/Auth/AuthSlice'
+import { useSelector } from 'react-redux'
+
 import { HiOutlineUserCircle } from 'react-icons/hi'
+import Logout from '../../../Authentication/Login/Logout'
 
 
 
 const navigation = [
   { name: 'Home', path: '/', current: true },
   { name: 'About', path: '/about', current: false },
-  { name: 'QR Scanner', path: '/QRLScanner', current: false },
+  { name: 'Contact us', path: '/contactUs', current: false },
+
 
 ]
 
@@ -21,16 +23,12 @@ function classNames(...classes) {
 }
 
 export default function Navigation() {
-  const dispatch = useDispatch();
+
   const user = useSelector((state => state?.auth?.user));
 
 
 
 
-  // logout -------------------------------
-  const handleLogout = () => {
-    dispatch(userLogout())
-  }
 
 
 
@@ -38,6 +36,25 @@ export default function Navigation() {
     { name: 'Your Profile', path: '/profile' },
     { name: 'Dashboard', path: '/dashboard' },
   ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -50,13 +67,19 @@ export default function Navigation() {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt=""
-                      />
+                      <NavLink to='/'>
+                        <img
+                          className="h-8 w-8"
+                          src="/logo.png"
+                          alt=""
+                        />
+                      </NavLink>
                     </div>
-                    <div className="hidden md:block">
+
+                  </div>
+                  <div className="hidden md:block">
+                    <div className="ml-4 flex items-center md:ml-6">
+
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item, i) => (
                           <NavLink
@@ -74,12 +97,6 @@ export default function Navigation() {
                           </NavLink>
                         ))}
                       </div>
-                    </div>
-                  </div>
-                  <div className="hidden md:block">
-                    <div className="ml-4 flex items-center md:ml-6">
-
-
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
@@ -105,10 +122,18 @@ export default function Navigation() {
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-                            <div  className="flex items-center bg-gray-100' : '',
+
+
+                            <div className="flex items-center bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700">
                               <div className="flex-shrink-0">
-                                <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
+                                {
+                                  user?.photoURL ?
+                                    <img className="h-8 w-8 rounded-full" src={user?.photoURL} alt="" /> :
+
+                                    <HiOutlineUserCircle className=' text-slate-700  h-8 w-8 rounded-full' />
+
+                                }
                               </div>
                               <div className="ml-3">
                                 <div className="text-md font-bold  leading-none ">{user?.name}</div>
@@ -117,7 +142,7 @@ export default function Navigation() {
 
 
                             </div>
-                        
+
                             {menu.map((item, i) => (
                               <Menu.Item key={i}>
                                 {({ active }) => (
@@ -183,19 +208,11 @@ export default function Navigation() {
 
                               :
 
-                              <Menu.Item >
-                                {({ active }) => (
-                                  <NavLink
-                                    onClick={handleLogout}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    Logout
-                                  </NavLink>
-                                )}
+                              <Menu.Item>
+
+                                <Logout className='block px-4 py-2 text-sm text-gray-700 hover:bg-slate-100' />
                               </Menu.Item>
+
                             }
 
                           </Menu.Items>
@@ -219,46 +236,88 @@ export default function Navigation() {
 
               <Disclosure.Panel className="md:hidden ">
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user?.photoURL} alt="" />
+                  <Disclosure.Button as={NavLink} to='/profile' className="flex items-center  my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full">
+                    <div className="flex-shrink-0 block ">
+
+
+                      <img className="h-8 w-8 rounded-full" src={user?.photoURL} alt="" />
+
+
+
+
+
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user?.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
+                      <div className="text-base font-medium  ">{user?.name}</div>
+                      <div className="text-sm font-medium leading-none ">{user?.email}</div>
                     </div>
 
 
-                  </div>
+                  </Disclosure.Button>
+                  <hr />
                   {navigation.map((item, i) => (
                     <Disclosure.Button
                       key={i}
                       as={NavLink}
                       to={item.path}
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
+                      className='block  my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full'
                     >
                       {item.name}
                     </Disclosure.Button>
                   ))}
+
+
+                  {!user?.email ? <div>
+                    <Disclosure.Button as={NavLink} to='/register'
+                      className=" block bg-slate-700 my-2 py-2 px-2 text-white rounded hover:bg-slate-600"
+                    >
+
+                      Register for User
+
+
+                    </Disclosure.Button >
+                    <Disclosure.Button as={NavLink} to='/registerOrganization'
+                      className=" block  my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full"
+                    >
+
+                      Registration for Organization
+
+
+                    </Disclosure.Button>
+
+                    <Disclosure.Button as={NavLink} to='/login'
+                      className=" block  my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full"
+                    >
+                      Login
+                    </Disclosure.Button>
+                  </div>
+
+                    :
+
+                    <Disclosure.Button
+                      className=" block bg-slate-700 my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full text-left"
+                    >
+
+                      <Logout className='bg-none' />
+
+                    </Disclosure.Button>}
+
                 </div>
-                <div className="border-t border-gray-700 pt-4 pb-3">
+                <hr />
+                <div className=" border-gray-700 pt-4 pb-3">
 
 
 
                   <div className="mt-3 space-y-1 px-2">
                     {menu.map((item, i) => (
-                      <div   key={i}>
+                      <div key={i}>
 
                         <Disclosure.Button
                           as={NavLink}
-                       
+
 
                           to={item.path}
-                          className={`block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white `}
+                          className={`block my-2 py-2 px-2 text-white rounded hover:bg-slate-600 w-full`}
                         >
                           {item.name}
                         </Disclosure.Button>

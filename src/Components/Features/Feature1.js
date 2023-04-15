@@ -11,11 +11,11 @@ import Image9 from "./image/image9.jpg"
 import Image10 from "./image/image10.jpg"
 import Image11 from "./image/image11.jpg"
 import Image12 from "./image/image12.jpg"
-import bg from "./image/bg.jpg"
+
 const Feature1 = () => {
     return (
         <div className=' py-28    bg-gradient-to-br from-slate-200 via-amber-300 to-slate-200 ' >
-            <div className=' container mx-auto '>
+            <div className=' container mx-auto px-3'>
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='  col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-6'>
                         <h1 className=' font-extrabold  font-serif text-2xl first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900'>Event</h1>

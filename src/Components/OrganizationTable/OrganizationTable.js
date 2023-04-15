@@ -1,9 +1,15 @@
 import React from 'react';
+import { useUpdateOrganizationMutation } from '../../Redux/features/Organization/OrganizationApi';
 
 
-const OrganizationTable = ({ d, handleChangeStatus }) => {
+const OrganizationTable = ({ d }) => {
 
-  
+    const [updateStatus] = useUpdateOrganizationMutation();
+    const handleChangeStatus = async (status) => {
+        const data = { status }
+        await updateStatus({ data, id: d?._id })
+    }
+
     return (
         <div className=' '>
             <div className=' grid grid-cols-12 gap-5 p-3'>
@@ -92,7 +98,7 @@ const OrganizationTable = ({ d, handleChangeStatus }) => {
                             <h1 className=' text-sm'>Empty seat:</h1>
                         </div>
                         <div className=' col-span-7 p-1 border-l'>
-                            <h1 className='text-sm'>{100 - d.childList.length}</h1>
+                            <h1 className='text-sm'>{100 - d?.childList.length}</h1>
                         </div>
                     </div>
                     <div className=' grid grid-cols-12 gap-5 border my-1'>
@@ -113,7 +119,7 @@ const OrganizationTable = ({ d, handleChangeStatus }) => {
 
                                 <select
                                     defaultValue={d?.status}
-                                    onChange={(e) => handleChangeStatus(e.target.value, d?._id)}
+                                    onChange={(e) => handleChangeStatus(e.target.value)}
                                     required
                                     className="relative block w-full rounded-t-md border-0 py-1.5 bg-white text-cyan-500 ring-1 ring-inset ring-cyan-300 placeholder:text-cyan-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6 p-3"
                                 >

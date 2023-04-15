@@ -1,9 +1,24 @@
 import React from 'react';
-import { MdManageAccounts } from "react-icons/md";
+import { MdAdminPanelSettings, MdManageAccounts, MdOutlineDashboard } from "react-icons/md";
 import { BiChild } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+import { HiOutlineUserCircle } from 'react-icons/hi';
+import { VscOrganization } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
 
 const AdminMenu = ({ open }) => {
+    const { user } = useSelector(state => state.auth);
+
+    const menus = [
+        { name: `Profile (${user.role})`, link: "/profile", icon: HiOutlineUserCircle },
+        { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
+        { name: "Manage Child", link: "/dashboard/manageChild", icon: MdManageAccounts },
+        { name: "Child List", link: "/dashboard/childList", icon: BiChild },
+        { name: "Organization List", link: "/dashboard/organizationList", icon: VscOrganization },
+        { name: "Make Admin", link: "/dashboard/makeAdmin", icon: MdAdminPanelSettings },
+        { name: "Feedback", link: "/dashboard/feedback", icon: MdAdminPanelSettings },
+    ];
+
     return (
         <div>
             {
@@ -23,8 +38,8 @@ const AdminMenu = ({ open }) => {
                             {item.name}
                         </h2>
                         <h2
-                             className={`${open && "hidden "
-                            } fixed left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1  group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}>
+                            className={`${open && "hidden "
+                                } fixed left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1  group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}>
                             {item.name}
                         </h2>
                     </Link>
@@ -36,10 +51,5 @@ const AdminMenu = ({ open }) => {
 };
 
 
-const menus = [
-    { name: "Manage Child", link: "/dashboard/manageChild", icon: MdManageAccounts },
-    { name: "Child List", link: "/dashboard/childList", icon: BiChild },
-    { name: "Organization List", link: "/dashboard/organizationList", icon: BiChild },
-];
 
 export default AdminMenu;

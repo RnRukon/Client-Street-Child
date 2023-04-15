@@ -1,11 +1,26 @@
 import React from 'react';
-import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineDashboard, MdOutlineFeedback } from "react-icons/md";
 import { BiChild } from "react-icons/bi";
 import { IoIosPersonAdd } from "react-icons/io";
-
+import { HiOutlineUserCircle } from 'react-icons/hi'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserMenu = ({ open }) => {
+    const { user } = useSelector(state => state.auth);
+
+
+
+    const menus = [
+        { name: `Profile (${user.role})`, link: "/profile", icon: HiOutlineUserCircle },
+        { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
+        { name: "Add Street Child", link: "/dashboard/addStreetChild", icon: IoIosPersonAdd },
+        { name: "My Child list", link: "/dashboard/myChildList", icon: BiChild },
+        { name: "Feedback", link: "/dashboard/feedback-form", icon: MdOutlineFeedback },
+
+
+    ];
+
     return (
         <div className="mt-4 flex flex-col gap-4  ">
             {
@@ -39,12 +54,6 @@ const UserMenu = ({ open }) => {
 };
 
 
-const menus = [
-    { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
-    { name: "Add Street Child", link: "/dashboard/addStreetChild", icon: IoIosPersonAdd },
-    { name: "My Child list", link: "/dashboard/myChildList", icon: BiChild },
 
-
-];
 
 export default UserMenu;

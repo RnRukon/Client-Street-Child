@@ -15,43 +15,16 @@ export const organizationApi = createApi({
             }),
             providesTags: ['organization']
         }),
-        /*  getAllStreetChild: builder.query({
-             query: () => ({
-                 url: `/getAllStreetChild`,
-                 method: 'GET',
- 
-             }),
-             providesTags: ['child']
-         }),
-         getSingleChild: builder.query({
-             query: ({ id }) => ({
-                 url: `/getSingleUser/${id}`,
-                 method: 'GET',
-                 headers: { 'Authorization': token },
-             }),
-             providesTags: ['child']
-         }),
- 
- 
-         getMyStreetChildList: builder.query({
-             query: () => ({
-                 url: `/getMyAllStreetChild`,
-                 method: 'GET',
-                 headers: { 'Authorization': token },
-             }),
-             providesTags: ['child']
-         }),
- 
- 
-         addChild: builder.mutation({
-             query: (data) => ({
-                 url: `/addStreetChild`,
-                 method: 'POST',
-                 headers: { 'Authorization': token },
-                 body: data
-             }),
-             invalidatesTags: ['child']
-         }),*/
+
+        getSingleOrganization: builder.query({
+            query: ({ id }) => ({
+                url: `/getSingleOrganization/${id}`,
+                method: 'GET',
+                headers: { 'Authorization': token },
+            }),
+            providesTags: ['organization']
+        }),
+    
         deliveryChildInOrganization: builder.mutation({
             query: ({ data }) => ({
                 url: `/deliveryChild`,
@@ -61,15 +34,15 @@ export const organizationApi = createApi({
             }),
             invalidatesTags: ['organization']
         }),
-        /*  updateOrganization: builder.mutation({
-             query: ({ data, id }) => ({
-                 url: `/updateOrganization/${id}`,
-                 method: 'PATCH',
-                 headers: { 'Authorization': token },
-                 body: data
-             }),
-             invalidatesTags: ['child']
-         }), */
+        updateOrganization: builder.mutation({
+            query: ({ data, id }) => ({
+                url: `/updateOrganization/${id}`,
+                method: 'PATCH',
+                headers: { 'Authorization': token },
+                body: data
+            }),
+            invalidatesTags: ['organization']
+        }),
 
 
     })
@@ -78,6 +51,7 @@ export const organizationApi = createApi({
 export const {
     useGetOrganizationsQuery,
     useUpdateOrganizationMutation,
-    useDeliveryChildInOrganizationMutation
+    useDeliveryChildInOrganizationMutation,
+    useGetSingleOrganizationQuery
 
 } = organizationApi;

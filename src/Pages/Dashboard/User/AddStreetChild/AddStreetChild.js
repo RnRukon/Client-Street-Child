@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import imageUploader from '../../../../Utils/ImageUploader/ImageUploader';
 import Image from './Image/Bullying-pana.svg'
 import { useAddChildMutation } from '../../../../Redux/features/Child/ChildApi';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 
 const AddStreetChild = () => {
 
@@ -31,7 +32,8 @@ const AddStreetChild = () => {
     }, [isSuccess, reset, isError, error])
     return (
 
-        <div className=' container mx-auto'>
+        <div className=' container mx-auto py-3'>
+              <DashboardNavbar pageTitle='Add a Street child'/>
             <div className=' grid grid-cols-12 gap-5'>
                 <div className=' col-span-12 md:col-span-6'>
                     <img className=' object-contain' src={Image} alt="" />
@@ -157,8 +159,7 @@ const AddStreetChild = () => {
                         <div className=' flex justify-end'>
                             <button
                                 type="submit"
-                                className=' py-1 px-10  mt-24 text-slate-50 bg-gradient-to-tr  from-cyan-300  to-cyan-700 hover:bg-gradient-to-tl active:bg-gradient-to-r rounded-lg font-extrabold
-'
+                                className='py-1 px-10  mt-24 text-slate-50 bg-gradient-to-tr  from-cyan-300  to-cyan-700 hover:bg-gradient-to-tl active:bg-gradient-to-r rounded-lg font-extrabold'
                             >
 
                                 Submit

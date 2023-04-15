@@ -1,6 +1,8 @@
 import React from 'react';
 import { useGetOrganizationsQuery } from '../../../../Redux/features/Organization/OrganizationApi';
 import OrganizationTable from '../../../../Components/OrganizationTable/OrganizationTable';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
+import { Link } from 'react-router-dom';
 
 const OrganizationList = () => {
     const { data } = useGetOrganizationsQuery();
@@ -9,11 +11,14 @@ const OrganizationList = () => {
 
     return (
         <div className=' container mx-auto py-3'>
+            <DashboardNavbar pageTitle='Organizations' />
             <div className=' grid grid-cols-12 gap-3 '>
                 {
                     data?.result?.map(data => (
                         <div key={data?._id} className=' col-span-12 sm:col-span-12  md:col-span-12 lg:col-span-6 xl:col-span-4 border '>
-                            <OrganizationTable d={data} />
+                            <Link to={`/dashboard/organization/details/${data?._id}`}>
+                                <OrganizationTable d={data} />
+                            </Link>
                         </div>
                     ))
                 }

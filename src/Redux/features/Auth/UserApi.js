@@ -6,14 +6,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/street-child/users' }),
     tagTypes: ['user'],
     endpoints: (builder) => ({
-       /*  getAllUsers: builder.query({
-            query: () => ({
-                url: `/get-all-users`,
-                method: 'GET',
-                headers: { 'Authorization': `Bearer ${localStorage?.getItem("token")}` },
-            }),
-            providesTags: ['user']
-        }), */
+     
         getMe: builder.query({
             query: () => ({
                 url: `/getMe`,
@@ -22,15 +15,7 @@ export const userApi = createApi({
             }),
             providesTags: ['user']
         }),
-      /*   changePassword: builder.mutation({
-            query: (data) => ({
-                url: `/update-password`,
-                method: 'PATCH',
-                headers: { 'Authorization': token },
-                body: data
-            }),
-            invalidatesTags: ['user']
-        }), */
+
         updateProfileInfo: builder.mutation({
             query: (data) => ({
                 url: `/updateProfile`,
@@ -40,43 +25,18 @@ export const userApi = createApi({
             }),
             invalidatesTags: ['user']
         }),
-    /*     applyForSupplier: builder.mutation({
+        makeAdmin: builder.mutation({
             query: (data) => ({
-                url: `/applyForSupplier`,
-                method: 'POST',
-                headers: { 'Authorization': token },
-                body: data
-            }),
-            invalidatesTags: ['user']
-        }), */
-      /*   getApplyForSupplier: builder.query({
-            query: () => ({
-                url: `/getApplyForSupplier`,
-                method: 'GET',
-                headers: { 'Authorization': token },
-            }),
-            providesTags: ['user']
-        }), */
-       /*  makeAddApplyForSupplier: builder.mutation({
-            query: (data) => ({
-                url: `/makeAddApplyForSupplier`,
+                url: `/makeAdmin`,
                 method: 'PATCH',
                 headers: { 'Authorization': token },
                 body: data
             }),
             invalidatesTags: ['user']
-        }), */
-       /*  deleteApplyForSupplier: builder.mutation({
-            query: (data) => ({
-                url: `/deleteApplyForSupplier`,
-                method: 'DELETE',
-                headers: { 'Authorization': token },
-                body: data
-            }),
-            invalidatesTags: ['user']
-        }), */
+        }),
+
 
     })
 })
 
-export const {useUpdateProfileInfoMutation,useGetMeQuery} = userApi;
+export const { useUpdateProfileInfoMutation, useGetMeQuery, useMakeAdminMutation } = userApi;
