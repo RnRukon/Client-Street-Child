@@ -3,7 +3,7 @@ import token from '../../../Utils/Token/token';
 
 export const childApi = createApi({
     reducerPath: 'childApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/street-child/streetChild' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://streed-child.onrender.com/api/v1/street-child/streetChild' }),
     tagTypes: ['child'],
     endpoints: (builder) => ({
 

@@ -3,10 +3,10 @@ import token from '../../../Utils/Token/token';
 
 export const userApi = createApi({
     reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/street-child/users' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://streed-child.onrender.com/api/v1/street-child/users' }),
     tagTypes: ['user'],
     endpoints: (builder) => ({
-     
+
         getMe: builder.query({
             query: () => ({
                 url: `/getMe`,

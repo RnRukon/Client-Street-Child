@@ -3,7 +3,7 @@ import token from '../../../Utils/Token/token';
 
 export const feedbackApi = createApi({
     reducerPath: 'feedbackApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/street-child/feedbacks' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://streed-child.onrender.com/api/v1/street-child/feedbacks' }),
     tagTypes: ['feedbacks'],
     endpoints: (builder) => ({
 

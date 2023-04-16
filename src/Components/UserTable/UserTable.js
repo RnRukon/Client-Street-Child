@@ -88,7 +88,7 @@ const UserTable = ({ child }) => {
 
             <div className='col-span-6 mt-3 h-96'>
 
-                <GoogleMaps location={child?.postOffice}/>
+                <GoogleMaps location={child?.district}/>
             </div>
         </div>
     );

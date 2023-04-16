@@ -5,9 +5,10 @@ import { RouterProvider } from 'react-router-dom';
 import auth from './Firebase/firebase.config';
 import { getMe } from './Redux/features/Auth/AuthSlice';
 import { routers } from './Routes/Routes';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
- 
+
 
 
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const App = () => {
     <div>
 
       <RouterProvider router={routers} />
+      <Toaster />
     </div>
   );
 };

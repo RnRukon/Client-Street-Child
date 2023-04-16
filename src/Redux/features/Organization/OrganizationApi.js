@@ -3,7 +3,7 @@ import token from '../../../Utils/Token/token';
 
 export const organizationApi = createApi({
     reducerPath: 'organizationApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/street-child/organizations' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://streed-child.onrender.com/api/v1/street-child/organizations' }),
     tagTypes: ['organization'],
     endpoints: (builder) => ({
 
@@ -24,7 +24,7 @@ export const organizationApi = createApi({
             }),
             providesTags: ['organization']
         }),
-    
+
         deliveryChildInOrganization: builder.mutation({
             query: ({ data }) => ({
                 url: `/deliveryChild`,

@@ -43,7 +43,7 @@ export const registration = createAsyncThunk(
         }
 
         if (user?.email) {
-            const res = await axios.post('http://localhost:5000/api/v1/street-child/users/createUser', user);
+            const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/createUser', user);
 
             user = res?.data?.result;
         }
@@ -65,7 +65,7 @@ export const login = createAsyncThunk(
         };
 
         if (user.email) {
-            const res = await axios.post('http://localhost:5000/api/v1/street-child/users/loginUser', { email: email });
+            const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/loginUser', { email: email });
             user = res?.data?.result?.user;
             if (res?.data?.result?.token) {
                 localStorage.setItem("street_Child_token", res?.data?.result?.token);
@@ -95,7 +95,7 @@ export const getMe = createAsyncThunk(
     "auth/getMe",
     async () => {
 
-        const res = await axios.get('http://localhost:5000/api/v1/street-child/users/getMe', {
+        const res = await axios.get('https://streed-child.onrender.com/api/v1/street-child/users/getMe', {
             headers: {
                 Authorization: token
             }
