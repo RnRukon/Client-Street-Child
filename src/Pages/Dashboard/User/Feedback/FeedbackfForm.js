@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 import StarsRating from 'stars-rating'
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 import { usePostFeedbacksMutation } from '../../../../Redux/features/Feedback/FeedbackApi';
 const FeedbackForm = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -11,7 +11,7 @@ const FeedbackForm = () => {
     const { user } = useSelector(state => state?.auth)
     const [postFeedback, { isLoading, isSuccess, isError, error }] = usePostFeedbacksMutation();
 
-    console.log(error);
+
 
     function handleRatingChange(value) {
         setRating(value);

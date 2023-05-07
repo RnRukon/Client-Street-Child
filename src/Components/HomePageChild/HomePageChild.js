@@ -15,11 +15,15 @@ const HomePageChild = () => {
 
 
 
+    // pagination --------------------
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const count = Math?.ceil(items?.length / itemsPerPage)
 
-    const [perPage] = useState(12);
-    const [size, setSize] = useState(perPage);
-    const [current, setCurrent] = useState(1);
-    const paginateItem = items?.slice((current - 1) * size, current * size)
+    const paginateItem = items?.slice(startIndex, endIndex)
+
 
     let arr = Array.apply(null, Array(20)).map((val, idx) => idx + 1);
 
@@ -41,12 +45,12 @@ const HomePageChild = () => {
                             id="age" className=' w-20 py-1 px-2 rounded-lg'>
                             {
                                 arr.map((d, i) => (
-                                    <option key={i}  value={i + 1}>{i + 1} Year</option>
+                                    <option key={i} value={i + 1}>{i + 1} Year</option>
                                 ))
                             }
 
                         </select>
-                      
+
 
                     </div>
                     <div className=''>
@@ -85,11 +89,9 @@ const HomePageChild = () => {
                 <div className='  flex justify-center pt-10'>
                     <div className="table-filter-info">
                         <Paginate
-                            items={items}
-                            current={current}
-                            size={size}
-                            setSize={setSize}
-                            setCurrent={setCurrent}
+                            setCurrentPage={setCurrentPage}
+                            page={currentPage}
+                            count={count}
                         />
                     </div>
                 </div>

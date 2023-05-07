@@ -1,31 +1,29 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import auth from './Firebase/firebase.config';
-import { getMe } from './Redux/features/Auth/AuthSlice';
+import { getMe, setIsLoading } from './Redux/features/Auth/AuthSlice';
 import { routers } from './Routes/Routes';
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
-
-
-
   const dispatch = useDispatch();
+
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-
-
-
-      if (user) {
-        // dispatch(setUser(newUser));
-        dispatch(getMe())
-          .then(res => {
-
-          })
-
-      }
-    });
+    try {
+      dispatch(setIsLoading(true))
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(getMe())
+        }
+      });
+    } catch (error) {
+      dispatch(setIsLoading(false))
+    } finally {
+      dispatch(setIsLoading(false))
+    }
   }, [dispatch]);
 
 
@@ -35,7 +33,6 @@ const App = () => {
 
   return (
     <div>
-
       <RouterProvider router={routers} />
       <Toaster />
     </div>

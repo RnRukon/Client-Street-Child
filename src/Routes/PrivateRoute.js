@@ -5,11 +5,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 
 const PrivateRoute = ({ children, ...rest }) => {
-    const { user, isLoading} = useSelector(state => state.auth)
+    const { user, isLoading } = useSelector(state => state.auth)
     let location = useLocation();
 
 
-    if (isLoading) {
+    if (isLoading && !user?.email) {
         return <div className='h-screen
          flex justify-center items-center ' ><h1 className=' text-red-600'>Loading...</h1></div>
     }
@@ -19,6 +19,8 @@ const PrivateRoute = ({ children, ...rest }) => {
     }
 
     return children;
+
+
 
 
 };

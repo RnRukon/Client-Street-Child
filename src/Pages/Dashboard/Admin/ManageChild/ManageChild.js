@@ -1,7 +1,7 @@
 import React from 'react';
-import { useGetAllChildQuery } from '../../../../Redux/features/Child/ChildApi';
 import { NavLink } from 'react-router-dom';
 import {FcViewDetails} from 'react-icons/fc';
+import { useGetAllChildQuery } from '../../../../Redux/features/Child/ChildApi';
 import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 const ManageChild = () => {
 

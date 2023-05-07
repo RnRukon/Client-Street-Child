@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 import { useForm } from 'react-hook-form';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 import { useMakeAdminMutation } from '../../../../Redux/features/Auth/UserApi';
 
 const MakeAdmin = () => {

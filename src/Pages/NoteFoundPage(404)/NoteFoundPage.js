@@ -1,5 +1,5 @@
 import React from 'react';
-import NoteFoundImage from '../../Images/404 Error Page not Found with people connecting a plug.gif'
+import NoteFoundImage from '../../Images/404.gif'
 const NoteFoundPage = () => {
 
     return (

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { AiOutlineLogout } from 'react-icons/ai';
 import UserMenu from "./UserMenu";
 import AdminMenu from "./AdminMenu";
 import { VscChromeClose } from 'react-icons/vsc';
 import Logout from "../../../../Authentication/Login/Logout";
-import { AiOutlineLogout } from 'react-icons/ai';
 import { useSelector } from "react-redux";
 
 

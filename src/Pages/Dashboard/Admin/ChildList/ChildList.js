@@ -19,11 +19,15 @@ const ChildList = () => {
 
 
 
-    const [perPage] = useState(6);
-    const [size, setSize] = useState(perPage);
-    const [current, setCurrent] = useState(1);
+       // pagination --------------------
+       const [currentPage, setCurrentPage] = useState(1);
+       const itemsPerPage = 6;
+       const startIndex = (currentPage - 1) * itemsPerPage;
+       const endIndex = startIndex + itemsPerPage;
+       const count = Math?.ceil(data?.result?.length / itemsPerPage)
+   
 
-    const paginateItem = data?.result?.slice((current - 1) * size, current * size)
+    const paginateItem = data?.result?.slice(startIndex, endIndex)
 
     return (
         <div className=' container mx-auto py-3'>
@@ -40,11 +44,9 @@ const ChildList = () => {
             <div className='  flex justify-center pt-10'>
                 <div className="table-filter-info">
                     <Paginate
-                        items={data?.result}
-                        current={current}
-                        size={size}
-                        setSize={setSize}
-                        setCurrent={setCurrent}
+                        setCurrentPage={setCurrentPage}
+                        page={currentPage}
+                        count={count}
                     />
                 </div>
             </div>

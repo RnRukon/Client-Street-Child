@@ -8,7 +8,7 @@ import Services from '../../Components/Services/Services';
 import Navigation from '../../Components/Shared/Navigation/Navigation';
 import Footer from '../../Components/Shared/Footer/Footer';
 import HomePageDeliveredChild from '../../Components/HomePageChild/HomePageDeliveredChild';
-import HomePageChild from '../../Components/HomePageChild/HomePageChild';
+import HomePageChild from '../../Components/HomePageChild/HomePageChild'; 
 
 const Home = () => {
     return (
