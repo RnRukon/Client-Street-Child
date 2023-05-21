@@ -2,22 +2,32 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
 import { useMakeAdminMutation } from '../../../../Redux/features/Auth/UserApi';
+import { toast } from 'react-hot-toast';
 
 const MakeAdmin = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const [makeAdmin, { isSuccess }] = useMakeAdminMutation();
+    const [makeAdmin, { isSuccess, isLoading, isError, error }] = useMakeAdminMutation();
 
     const onSubmit = async (data) => {
-        makeAdmin(data);
-
+        await makeAdmin(data);
     };
 
+
+
     useEffect(() => {
-        if (isSuccess) {
-            alert('Make admin is successfully')
-            reset()
+        if (isLoading) {
+            toast.loading('Loading...', { id: 'makeAdmin' });
         }
-    }, [isSuccess, reset])
+        if (isSuccess) {
+            toast.success('Make admin is successfully', { id: 'makeAdmin' });
+            reset();
+        }
+        if (isError) {
+            toast.error(error, { id: "makeAdmin" });
+        }
+    }, [isLoading, isSuccess, error, isError, reset]);
+
+
     return (
         <div className='container mx-auto py-3'>
             <DashboardNavbar pageTitle='Child List' />

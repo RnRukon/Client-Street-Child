@@ -3,6 +3,7 @@ import { MdOutlineDashboard, MdOutlineFeedback } from "react-icons/md";
 import { BiChild } from "react-icons/bi";
 import { IoIosPersonAdd } from "react-icons/io";
 import { HiOutlineUserCircle } from 'react-icons/hi'
+import { FiHome } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -12,6 +13,7 @@ const UserMenu = ({ open }) => {
 
 
     const menus = [
+        { name: `Home`, link: "/", icon: FiHome },
         { name: `Profile (${user.role})`, link: "/profile", icon: HiOutlineUserCircle },
         { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
         { name: "Add Street Child", link: "/dashboard/addStreetChild", icon: IoIosPersonAdd },

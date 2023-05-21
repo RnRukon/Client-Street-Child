@@ -10,22 +10,27 @@ import Image from '../../Images/Tablet login.gif'
 export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.auth.user);
+    const auth = useSelector(state => state.auth);
     const onSubmit = ({ email, password }) => {
 
         dispatch(login({ email, password }))
 
     };
+
+
     const navigate = useNavigate();
     const location = useLocation();
 
 
     useEffect(() => {
-        if (user.email) {
+        if (auth?.user?.email) {
             navigate(location?.state?.from || '/')
         }
-    }, [navigate, user.email, location?.state?.from])
+    }, [navigate, auth?.user?.email, location?.state?.from])
 
+
+
+    
     return (
         <>
             <Navigation />

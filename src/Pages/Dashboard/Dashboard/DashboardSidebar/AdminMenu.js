@@ -3,6 +3,7 @@ import { MdAdminPanelSettings, MdManageAccounts, MdOutlineDashboard } from "reac
 import { BiChild } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import { HiOutlineUserCircle } from 'react-icons/hi';
+import { FiHome } from 'react-icons/fi';
 import { VscOrganization } from 'react-icons/vsc';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +11,7 @@ const AdminMenu = ({ open }) => {
     const { user } = useSelector(state => state.auth);
 
     const menus = [
+        { name: `Home`, link: "/", icon: FiHome },
         { name: `Profile (${user.role})`, link: "/profile", icon: HiOutlineUserCircle },
         { name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
         { name: "Manage Child", link: "/dashboard/manageChild", icon: MdManageAccounts },

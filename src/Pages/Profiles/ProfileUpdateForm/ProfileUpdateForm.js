@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/firebase.config';
 import { useGetMeQuery, useUpdateProfileInfoMutation } from '../../../Redux/features/Auth/UserApi';
+import { toast } from 'react-hot-toast';
 const ProfileUpdateForm = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -9,18 +10,24 @@ const ProfileUpdateForm = () => {
 
     const { data } = useGetMeQuery();
 
-    const [updateProfile, { isSuccess }] = useUpdateProfileInfoMutation();
+    const [updateProfile, { isSuccess, isLoading, isError, error }] = useUpdateProfileInfoMutation();
 
-    const [edit, seEdit] = useState(true);
+    const [edit, setEdit] = useState(true);
 
     const user = data?.result?.user;
 
     useEffect(() => {
-        if (isSuccess) {
-            alert("Profile update Success")
-            seEdit(true)
+        if (isLoading) {
+            toast.loading('Loading...', { id: 'update' })
+            setEdit(true)
         }
-    }, [isSuccess])
+        if (isSuccess) {
+            toast.success('Update success', { id: 'update' })
+        }
+        if (isError) {
+            toast.error(error, { id: "update" })
+        }
+    }, [isLoading, isSuccess, error, isError])
 
     useEffect(() => {
         const name = user?.name;
@@ -46,7 +53,7 @@ const ProfileUpdateForm = () => {
         <div>
             <div className=' flex justify-between '>
                 <h3>My Account</h3>
-                <button onClick={() => seEdit(!edit)} className='active:text-teal-500'>Edit</button>
+                <button onClick={() => setEdit(!edit)} className='active:text-teal-500'>Edit</button>
             </div>
             <hr />
             <div>

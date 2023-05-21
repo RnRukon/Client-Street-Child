@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import ProfileImage from '../image/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png'
 import auth from '../../../Firebase/firebase.config';
 import imageUploader from '../../../Utils/ImageUploader/ImageUploader';
@@ -7,8 +7,8 @@ import { useGetMeQuery, useUpdateProfileInfoMutation } from '../../../Redux/feat
 const ProfilePhotoUpdate = () => {
     const { data: user } = useGetMeQuery();
 
-   
-    const [updateProfile] = useUpdateProfileInfoMutation();
+
+    const [updateProfile, { isLoading, isSuccess, isError, error }] = useUpdateProfileInfoMutation();
 
     const handlePhotoChange = async (data) => {
 
@@ -20,6 +20,18 @@ const ProfilePhotoUpdate = () => {
             updateProfile({ photoURL });
         })
     }
+    useEffect(() => {
+        if (isLoading) {
+            toast.loading('Loading...', { id: 'update' })
+
+        }
+        if (isSuccess) {
+            toast.success('Update success', { id: 'update' })
+        }
+        if (isError) {
+            toast.error(error, { id: "update" })
+        }
+    }, [isLoading, isSuccess, error, isError])
 
 
     return (
