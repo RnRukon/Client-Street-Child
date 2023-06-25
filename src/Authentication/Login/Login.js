@@ -90,6 +90,7 @@ export default function Login() {
                                         />
                                         {errors.password && errors.password.type === "required" && <span>Email is required</span>}
                                         {errors.password && errors.password.type === "minLength" && <span>Min length exceeded</span>}
+                                        <p className='text-xs text-red-400'>{auth?.error}</p>
                                     </div>
                                 </div>
 

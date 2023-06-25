@@ -4,12 +4,13 @@ import imageUploader from '../../../../Utils/ImageUploader/ImageUploader';
 import Image from './Image/Bullying-pana.svg'
 import { useAddChildMutation } from '../../../../Redux/features/Child/ChildApi';
 import DashboardNavbar from '../../Dashboard/DashboardNavbar/DashboardNavbar';
+import { toast } from 'react-hot-toast';
 
 const AddStreetChild = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const [addChild, { isError, isSuccess, error }] = useAddChildMutation();
+    const [addChild, { isLoading,isError, isSuccess, error }] = useAddChildMutation();
 
 
     const onSubmit = async (data) => {
@@ -22,14 +23,21 @@ const AddStreetChild = () => {
     };
 
 
+
+
     useEffect(() => {
-        if (isSuccess) {
-            alert("Add Child Success")
-            reset()
-        } if (isError) {
-            alert(error)
+        if (isLoading) {
+            toast.loading('Uploading...', { id: 'add' });
         }
-    }, [isSuccess, reset, isError, error])
+        if (isSuccess) {
+            toast.success('Uploaded', { id: 'add' });
+            reset();
+        }
+        if (isError) {
+            toast.error(error, { id: "add" });
+        }
+    }, [isLoading, isSuccess, error, isError, reset]);
+
     return (
 
         <div className=' container mx-auto py-3'>

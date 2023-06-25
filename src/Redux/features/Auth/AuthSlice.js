@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import auth from '../../../Firebase/firebase.config';
 import axios from 'axios';
 import token from '../../../Utils/Token/token';
@@ -21,16 +21,16 @@ export const registration = createAsyncThunk(
 
 
 
-        const data = await createUserWithEmailAndPassword(auth, email, password);
+        /*  const data = await createUserWithEmailAndPassword(auth, email, password);
+ 
+         await updateProfile(auth.currentUser, {
+             displayName: name, photoURL
+         }); */
 
-        await updateProfile(auth.currentUser, {
-            displayName: name, photoURL
-        });
-
-        let user = {
-            email: data?.user?.email,
-            photoURL: data?.user?.email ? data?.user?.photoURL : photoURL,
-            name: data?.user?.email ? data?.user?.displayName : name,
+        let userData = {
+            email: email,
+            photoURL: photoURL,
+            name: name,
             district,
             phoneNumber,
             founded,
@@ -39,14 +39,12 @@ export const registration = createAsyncThunk(
             upazila,
             division,
             seat,
-            role
+            role,
+            password
         }
+        const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/createUser', userData);
 
-        if (user?.email) {
-            const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/createUser', user);
-
-            user = res?.data?.result;
-        }
+        const user = res?.data?.result;
 
         return user;
 
@@ -56,20 +54,12 @@ export const registration = createAsyncThunk(
 export const login = createAsyncThunk(
     "auth/login",
     async ({ email, password }) => {
-        const data = await signInWithEmailAndPassword(auth, email, password);
 
-        let user = {
-            email: data?.user?.email,
-            photoURL: data?.user?.photoURL,
-            name: data?.user?.displayName
-        };
+        const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/loginUser', { email: email, password: password });
 
-        if (user.email) {
-            const res = await axios.post('https://streed-child.onrender.com/api/v1/street-child/users/loginUser', { email: email });
-            user = res?.data?.result?.user;
-            if (res?.data?.result?.token) {
-                localStorage.setItem("street_Child_token", res?.data?.result?.token);
-            }
+        const user = res?.data?.result?.user;
+        if (res?.data?.result?.token) {
+            localStorage.setItem("street_Child_token", res?.data?.result?.token);
         }
         return user;
 
