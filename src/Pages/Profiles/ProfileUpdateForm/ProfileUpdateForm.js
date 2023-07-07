@@ -61,7 +61,7 @@ const ProfileUpdateForm = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     className="mt-8 space-y-6" >
 
-                    <div className=" grid md:grid-cols-12 gap-5  rounded-md shadow-sm">
+                    {user?.role !== "organization" ? <div className=" grid md:grid-cols-12 gap-5  rounded-md shadow-sm">
                         <div className=' col-span-6'>
                             <label htmlFor="fname" className="">
                                 First Name
@@ -106,9 +106,32 @@ const ProfileUpdateForm = () => {
                             {errors.lname && errors.lname.type === "minLength" && <span>Min length exceeded</span>}
                         </div>
 
+                    </div> :
+                        <div className=' col-span-6'>
+                            <label htmlFor="fname" className="">
+                            Organization Name
+                            </label>
+                            <input
+                                id="fname"
+                                name="fname"
+                                type="fname"
+                                autoComplete="fname"
+                                required
+                                disabled={edit}
+                                className="relative block w-full rounded-t-md border-0 py-1.5 text-cyan-500 ring-1 ring-inset ring-cyan-300 placeholder:text-cyan-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6 p-3"
+                                placeholder="First Name"
+                                {...register('fname', { required: true, minLength: 5 })}
 
 
-                    </div>
+                            />
+
+                            {errors.fname && errors.fname.type === "required" && <span>First Name is required</span>}
+                            {errors.fname && errors.fname.type === "maxLength" && <span>Max length exceeded</span>}
+                            {errors.fname && errors.fname.type === "minLength" && <span>Min length exceeded</span>}
+
+
+                        </div>
+                    }
 
                     <div className=' grid md:grid-cols-12 gap-5'>
                         <div className=" col-span-6 -space-y-px rounded-md shadow-sm">
@@ -128,6 +151,27 @@ const ProfileUpdateForm = () => {
                                     {...register('email', { required: true, type: 'email' })}
                                 />
                                 {errors.email && errors.email.type === "required" && <span>Email is required</span>}
+                            </div>
+
+
+                        </div>
+                        <div className=" col-span-6 -space-y-px rounded-md shadow-sm">
+                            <div>
+                                <label htmlFor="Seat" className="">
+                                Seat
+                                </label>
+                                <input
+                                    id="Seat"
+                                    name="Seat"
+                                    type="number"
+                                    autoComplete="Seat"
+                                    required
+                                    className="relative block w-full rounded-t-md border-0 py-1.5 text-cyan-500 ring-1 ring-inset ring-cyan-300 placeholder:text-cyan-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6 p-3"
+                                    placeholder="Seat number"
+                                    disabled={edit}
+                                    {...register('seat', { required: true, type: 'number' })}
+                                />
+                                {errors.seat && errors.seat.type === "required" && <span>seat is required</span>}
                             </div>
 
 
@@ -156,6 +200,8 @@ const ProfileUpdateForm = () => {
 
 
                         </div>
+
+                        
                         <div className=" col-span-6 -space-y-px rounded-md shadow-sm">
                             {
                                 user?.role === "user" &&

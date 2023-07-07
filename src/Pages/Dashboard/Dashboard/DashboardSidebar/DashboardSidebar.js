@@ -6,6 +6,7 @@ import AdminMenu from "./AdminMenu";
 import { VscChromeClose } from 'react-icons/vsc';
 import Logout from "../../../../Authentication/Login/Logout";
 import { useSelector } from "react-redux";
+import OrganizationMenu from "./OrganizationMenu";
 
 
 
@@ -13,7 +14,7 @@ export default function DashboardSidebar() {
     const [open, setOpen] = useState(true);
     const { user } = useSelector(state => state.auth);
 
-  
+
     return (
 
         <section className={` bg-gradient-to-l from-slate-500 via-slate-700 to-slate-900 ${open ? "w-72" : " w-16"}  duration-500 text-gray-100 px-4 rounded-3xl`}>
@@ -40,6 +41,8 @@ export default function DashboardSidebar() {
 
 
                 {user?.role === 'admin' && <AdminMenu open={open} />}
+
+                {user?.role === 'organization' && <OrganizationMenu open={open} />}
 
 
                 <Logout

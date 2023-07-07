@@ -24,6 +24,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import NoteFoundPage from "../Pages/NoteFoundPage(404)/NoteFoundPage";
 import FeedbackForm from "../Pages/Dashboard/User/Feedback/FeedbackfForm";
 import Feedback from "../Pages/Dashboard/Admin/Feedback/Feedback";
+import OurChild from "../Pages/Dashboard/User/OurChild/OurChild";
 
 
 
@@ -100,6 +101,13 @@ export const routers = createBrowserRouter([
                         element:
                             <PrivateRoute>
                                 <MyChildList />
+                            </PrivateRoute>
+                    },
+                    {
+                        path: '/dashboard/outChildList',
+                        element:
+                            <PrivateRoute>
+                                <OurChild />
                             </PrivateRoute>
                     },
                     {
